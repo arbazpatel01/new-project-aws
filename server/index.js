@@ -172,18 +172,28 @@ app.delete('/api/contacts/:id', async (req, res) => {
 });
 
 // ============================================
-// Serve static files from React build in production
+// Serve static files from React build
 // ============================================
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
+// Serve static files from build folder
+app.use(express.static(path.join(__dirname, '../client/build')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+// Handle React routing, return all requests to React app
+app.get('*', (req, res) => {
+  const indexPath = path.join(__dirname, '../client/build', 'index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      res.status(404).json({
+        error: 'Not Found',
+        message: 'React build not found. Run "npm run build" in the client folder first.',
+        path: indexPath
+      });
+    }
   });
-}
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📡 API available at http://localhost:${PORT}/api`);
   console.log(`📝 Contact form endpoint: POST http://localhost:${PORT}/api/contact`);
+  console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
