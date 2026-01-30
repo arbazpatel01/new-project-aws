@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import ContactForm from './ContactForm';
 
 function App() {
     const [serverStatus, setServerStatus] = useState({
@@ -116,6 +117,9 @@ function App() {
                     </div>
                 )}
             </div>
+
+            {/* Contact Form Section */}
+            <ContactForm />
 
             {/* Footer */}
             <footer className="footer">

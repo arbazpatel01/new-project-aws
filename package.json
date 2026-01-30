@@ -12,12 +12,19 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
-  "keywords": ["react", "nodejs", "aws", "lightsail"],
+  "keywords": [
+    "react",
+    "nodejs",
+    "aws",
+    "lightsail"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2",
+    "mysql2": "^3.16.2"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
